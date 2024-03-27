@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   app:
-    image: learning-docker/node:v1
+    image: yuetl/devops-todo-app
     ports:
       - "8000:8000"
     restart: unless-stopped

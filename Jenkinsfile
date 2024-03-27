@@ -1,20 +1,17 @@
 pipeline {
   agent any 
   stages {
-    stage('Hello'){
+    //docker build
+    stage('Build and test'){
 	    steps {
-    	    echo 'Hello'
+    	    sh 'ls -la'
+          sh 'docker build -t devops-todo-app:lastest'
 	    }
     }
-    stage('List file'){
-        steps{
-            sh 'ls -la'
-        }
-    }
-    stage('End'){
-        steps{
-            echo 'Finish'
-        }
-    }
+    // stage('Push Dockerhub'){
+    //     steps{
+    //         sh 'docker push yuetl/devops-todo-app'
+    //     }
+    // }
   }
 }
