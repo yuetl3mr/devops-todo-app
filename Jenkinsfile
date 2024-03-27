@@ -1,5 +1,8 @@
 pipeline {
-  agent any 
+  agent any
+  tools {
+        dockerTool 'docker'
+  } 
   stages {
     //docker build
     stage('Build and test'){
