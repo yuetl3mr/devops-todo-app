@@ -3,8 +3,6 @@
 import groovy.transform.Field
 
 @Field
-String DOCKER_USER_REF = '<DOCKERHUB_ID_PLACEHOLDER>'
-@Field
 String SSH_ID_REF = '<SSH_ID_PLACEHOLDER>'
 
 pipeline {
