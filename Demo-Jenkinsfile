@@ -15,30 +15,31 @@ pipeline {
     }
 
     stages {
-        stage("build and test") {
+        stage('Build') {
             steps {
-                "docker build -t vitnguyen/mgm-training-todo-app:0.0.2"
+                sh 'docker build -t vitnguyen/mgm-training-todo-app:0.0.3 .'
             }
         }
         stage("Docker login and push docker image") {
             steps {
                 withBuildConfiguration {
-                    sh 'echo $DOCKER_USER_REF | docker login -u $repository_username -p $repository_password'  
-                    sh 'docker push vitnguyen/mgm-training-todo-app:0.0.2'              		
+                    sh 'docker login -u "$USER" -p "$PASSWD"'
+                    sh 'docker push vitnguyen/mgm-training-todo-app:0.0.3'        		
                 }
             }
         }
-        // stage("deploy") {
-        //     steps {
-        //         withBuildConfiguration {
-        //             sshagent(credentials: [SSH_ID_REF]) {
-        //                 sh '''
-        //                     // TODO here
-        //                 '''
-        //             }
-        //         }
-        //     }
-        // }
+        stage("deploy") {
+             steps {
+                 withBuildConfiguration {
+                     sshagent(credentials: [SSH_ID_REF]) {
+                         sh '''
+                            docker run -d --rm --name todo-app -p 8000:8000 vitnguyen/mgm-training-todo-app:0.0.3
+                            docker ps
+                         '''
+                     }
+                 }
+             }
+        }
     }
 }
 
