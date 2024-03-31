@@ -31,7 +31,7 @@ pipeline {
                  withBuildConfiguration {
                      sshagent(credentials: [SSH_ID_REF]) {
                          sh '''
-                            docker run -d --rm --name todo-app -p 8000:8000 vitnguyen/mgm-training-todo-app:0.0.3
+                            docker run -d --rm --name y-todo-app -p 8000:8000 vitnguyen/mgm-training-todo-app:0.0.3
                             docker ps
                          '''
                      }
