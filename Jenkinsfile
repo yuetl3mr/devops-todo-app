@@ -1,13 +1,13 @@
 pipeline {
   agent any
-  tools {
-        dockerTool 'docker'
-  } 
+  // tools {
+  //       dockerTool 'docker'
+  // } 
   stages {
     //docker build
     stage('Build and test'){
 	    steps {
-    	    sh 'ls -la'
+    	    //sh 'ls -la'
           sh 'docker build -t devops-todo-app:lastest'
 	    }
     }
